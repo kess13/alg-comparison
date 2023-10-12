@@ -6,18 +6,24 @@ vector <int> countingsort(vector<int> vec)
 {
 vector <int> copy=vec;
 auto max = max_element(vec.begin(), vec.end());
-string biggest = to_string(max);
-for (int i=biggest.length()-1; i>0; i--)
+int maxel= *max;
+
+string biggest =to_string(maxel);
+for (int i=biggest.length(); i>0; i--)
 {
+    vector <int> copy=vec;
 for (int i=0; i<vec.size(); i++)
 {
+    
 int a=vec[i]%10;
-if (a==0)
+copy.push_back(a);
+if ()
 
 }
 
 
 }
+return vec;
 }
 
 
