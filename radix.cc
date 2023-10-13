@@ -18,9 +18,7 @@ for (int i=0; i <= maxel; i++) //to make cumulative sum of count array elements
 temp=temp+countarr[i];
 countarr[i]=temp;
 }
- for (int i = 0; i <= vec.size()-1; i++) {
-    
-        vec[countarr[vec[i]] - 1] = vec[i];
+ for (int i = vec.size() - 1; i >= 0; i--) {
         
     }
     return vec;
@@ -33,7 +31,7 @@ countarr[i]=temp;
 int main()
 {
 
-vector <int> vec = {0,1,9,3,5,2,4};
+vector <int> vec = {0,1,9,3,5,2,4,0,6,8};
 vec=countingsort(vec);
 for (int i : vec)
 {
