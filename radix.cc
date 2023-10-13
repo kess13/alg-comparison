@@ -18,10 +18,12 @@ for (int i=0; i <= maxel; i++) //to make cumulative sum of count array elements
 temp=temp+countarr[i];
 countarr[i]=temp;
 }
+vector<int> res(vec.size());
  for (int i = vec.size() - 1; i >= 0; i--) {
-        
+        int pos=countarr[vec[i]]-1;
+        res[pos]=vec[i];
     }
-    return vec;
+    return res;
 
 }
 
