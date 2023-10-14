@@ -17,24 +17,25 @@ SecondCopy[i]=SecondCopy[i]/10;// to erase last digit
 
 
 }
-}
+int MaxForSmallerVec= *max_element(MainCopy.begin(), MainCopy.end());
 
 int temp=0;
-vector<int> countarr(maxel+1,0);
-for (int i=0; i <= maxel; i++)
+vector<int> countarr(MaxForSmallerVec+1,0);
+for (int i=0; i <= MaxForSmallerVec; i++)
 {
-countarr[i]=count(vec.begin(), vec.end(), i);
+countarr[i]=count(MainCopy.begin(), MainCopy.end(), i);
 }
-for (int i=0; i <= maxel; i++) 
+for (int i=0; i <= MaxForSmallerVec; i++) 
 {
 temp=temp+countarr[i];
 countarr[i]=temp;
 }
-vector<int> res(vec.size());
- for (int i = vec.size() - 1; i >= 0; i--) {
-        int pos=countarr[vec[i]]-1;
+vector<int> res(MainCopy.size());
+ for (int i = MainCopy.size() - 1; i >= 0; i--) {
+        int pos=countarr[MainCopy[i]]-1;
         res[pos]=vec[i];
     }
+}
     return res;
 
 }
