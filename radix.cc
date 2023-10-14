@@ -2,54 +2,60 @@
 #include <vector>
 using namespace std;
 #include <algorithm>
-vector <int> radixsort(vector<int> vec)
+vector <int> countingsort(vector<int> vec)
 {
-    vector <int> MainCopy=vec;
-    vector <int> SecondCopy=vec;
+
 auto max = max_element(vec.begin(), vec.end());
 int maxel= *max;
-string maxstr= to_string(maxel);
-for (int j=maxstr.length(); j>0;j--){
-    for (int i=0; i < vec.size(); i++)
-{
-MainCopy[i]=SecondCopy[i]%10;
-SecondCopy[i]=SecondCopy[i]/10;
-
-
-}
-int MaxForSmallerVec= *max_element(MainCopy.begin(), MainCopy.end());
-
 int temp=0;
-vector<int> countarr(MaxForSmallerVec+1,0);
-for (int i=0; i <= MaxForSmallerVec; i++)
+vector<int> countarr(maxel+1,0);
+for (int i=0; i <= maxel; i++)
 {
-countarr[i]=count(MainCopy.begin(), MainCopy.end(), i);
+countarr[i]=count(vec.begin(), vec.end(), i);
 }
-for (int i=0; i <= MaxForSmallerVec; i++) 
+for (int i=0; i <= maxel; i++) 
 {
 temp=temp+countarr[i];
 countarr[i]=temp;
 }
-vector<int> res(MainCopy.size());
- for (int i = MainCopy.size() - 1; i >= 0; i--) {
-        int pos=countarr[MainCopy[i]]-1;
+vector<int> res(vec.size());
+ for (int i = vec.size() - 1; i >= 0; i--) {
+        int pos=countarr[vec[i]]-1;
         res[pos]=vec[i];
-
     }
-    vec=res;
-}
-    return vec;
+    return res;
 
 }
+ 
+ 
+vector <int> radix (vector<int> vec) {
+vector <int> copy(vec), MainCopy(vec);
+auto max = max_element(vec.begin(), vec.end());
+int maxel= *max;
+string maxDigit=to_string(maxel);
+for (int i=0; i < maxDigit.length(); i++)
+{
+    for (int j=0; j <vec.size(); j++)
+    {
+MainCopy[j]=copy[j]%10;
+copy[j]=vec[j]/10;
+    }
+    vec=countingsort(MainCopy);
 
+
+}
+return vec;
+
+
+}
 
 
 
 int main()
 {
 
-vector <int> vec = {0,3,9,3,51,4,2,0,6,8};
-vec=radixsort(vec);
+vector <int> vec = {0,1,9,3,335,42,4,0,55,8};
+vec=radix(vec);
 for (int i : vec)
 {
 cout << " " <<i;
