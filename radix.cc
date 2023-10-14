@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 #include <algorithm>
-vector <int> countingsort(vector<int> vec)
+vector <int> radixsort(vector<int> vec)
 {
     vector <int> MainCopy=vec;
     vector <int> SecondCopy=vec;
@@ -33,10 +33,10 @@ countarr[i]=temp;
 vector<int> res(MainCopy.size());
  for (int i = MainCopy.size() - 1; i >= 0; i--) {
         int pos=countarr[MainCopy[i]]-1;
-        res[pos]=vec[i];
+        vec[pos]=vec[i];
     }
 }
-    return res;
+    return vec;
 
 }
 
@@ -47,7 +47,7 @@ int main()
 {
 
 vector <int> vec = {0,13,129,3,5,442,42,0,61,28};
-
+vec=radixsort(vec);
 for (int i : vec)
 {
 cout << " " <<i;
