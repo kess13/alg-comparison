@@ -12,8 +12,8 @@ string maxstr= to_string(maxel);
 for (int j=maxstr.length(); j>0;j--){
     for (int i=0; i < vec.size(); i++)
 {
-MainCopy[i]=SecondCopy[i]%10;// to extract last digit 
-SecondCopy[i]=SecondCopy[i]/10;// to erase last digit
+MainCopy[i]=SecondCopy[i]%10;
+SecondCopy[i]=SecondCopy[i]/10;
 
 
 }
@@ -33,8 +33,10 @@ countarr[i]=temp;
 vector<int> res(MainCopy.size());
  for (int i = MainCopy.size() - 1; i >= 0; i--) {
         int pos=countarr[MainCopy[i]]-1;
-        vec[pos]=vec[i];
+        res[pos]=vec[i];
+
     }
+    vec=res;
 }
     return vec;
 
@@ -46,7 +48,7 @@ vector<int> res(MainCopy.size());
 int main()
 {
 
-vector <int> vec = {0,13,129,3,5,442,42,0,61,28};
+vector <int> vec = {0,3,9,3,51,4,2,0,6,8};
 vec=radixsort(vec);
 for (int i : vec)
 {
