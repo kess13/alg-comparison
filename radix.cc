@@ -39,7 +39,7 @@ vector<int> radix(vector<int> vec) {
         vector<int> res(vec.size());
 
         for (int j = 0; j < vec.size(); j++) {
-            res[j] = vec[positionvec[j]];
+            res[positionvec[j]] = vec[j];
         }
 
         vec = res; 
