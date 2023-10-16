@@ -2,16 +2,49 @@
 #include <vector>
 using namespace std;
 #include <algorithm>
-void MakeHeap(vector<int> vec)
+
+void MakeHeap (int heap_size, vector<int> vec)
 {
-int LeftChild = 0;//2*i+1
-int RightChild = 0;//2*i+2
-int Parent = 0;//floor i/2
-int MainEl=0;//i
 
 
 
 }
+void heapify(vector<int> &vec, int i)
+{
+int CurrentEl=i;
+int LeftChild = 2*i+1; // we need to make both children  be smaller than parent 
+int RightChild = 2*i+2;
+    if (vec[LeftChild]>vec[RightChild])
+   {
+     if (vec[LeftChild]>vec[CurrentEl])
+     swap(vec[LeftChild],vec[CurrentEl]);
+   }
+
+    if (vec[RightChild]>vec[LeftChild])
+       { 
+        
+        if (vec[RightChild]>vec[CurrentEl])
+         swap(vec[RightChild],vec[CurrentEl]);
+
+       }
+
+
+}
+
+void heapsort(vector <int>&vec)
+{
+    
+for (int i = 0; i < vec.size(); i++)
+{
+MakeHeap(vec.size()-i, vec);
+}
+
+
+
+}
+
+
+
 
 
 
@@ -20,6 +53,7 @@ int main()
 
 vector <int> vec = {0,1,9,3,35,42,4,0,55,8};
 
+heapsort(vec);
 
 for (int i : vec)
 {
