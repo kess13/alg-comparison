@@ -10,19 +10,7 @@ void heapify(vector<int> &vec, int i, int size) {
     int CurrentEl = i;
     int LeftChild = 2 * i + 1;
     int RightChild = 2 * i + 2;
-    if (LeftChild <=size && RightChild <= size) {
-        while (max(vec[LeftChild], vec[RightChild]) > vec[CurrentEl]) {
-            if (vec[LeftChild] > vec[RightChild]) {
-                if (vec[LeftChild] > vec[CurrentEl]) {
-                    swap(vec[LeftChild], vec[CurrentEl]);
-                }
-            } else {
-                if (vec[RightChild] > vec[CurrentEl]) {
-                    swap(vec[CurrentEl], vec[RightChild]);
-                }
-            }
-        }
-    }
+    
 }
 
 
