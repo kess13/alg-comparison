@@ -10,32 +10,37 @@ void heapify(vector<int> &vec, int i, int size) {
     int CurrentElIndex = i;
     int LeftChild = 2 * i + 1;
     int RightChild = 2 * i + 2;
-    if (LeftChild<size && RightChild<size){
-      if ((vec[LeftChild]>vec[CurrentElIndex] ) || (vec[RightChild]>vec[CurrentElIndex]))
-      {
-        if (vec[LeftChild]>vec[RightChild] && vec[LeftChild]>vec[CurrentElIndex])
-        swap(vec[LeftChild],vec[CurrentElIndex]);
-         if (vec[LeftChild]<vec[RightChild] && vec[RightChild]>vec[CurrentElIndex])
-        swap(vec[RightChild],vec[CurrentElIndex]);
-
-
-
-
-
-      }
-    }
     
+      
+        if (LeftChild < size && vec[LeftChild] > vec[CurrentElIndex])
+        swap(vec[CurrentElIndex], vec[LeftChild]);
+
+   
+  if (RightChild < size && vec[RightChild] > vec[CurrentElIndex])
+        swap(vec[CurrentElIndex], vec[RightChild]);
+
+      if (vec[0]>vec[size-1])
+      swap(vec[0], vec[size-1]);
 }
 
 
 
 void MakeHeap(vector<int> &vec, int heap_size) {
-    for (int i = heap_size-1; i >= 0; i--) { 
+    
+    for (int i = heap_size/2-1; i >= 0; i--) { 
         heapify(vec, i, heap_size);
     }
+   
+    
+    
+    
 }
+void MainSort (vector<int> &vec, int heap_size)
+{
+MakeHeap(vec,heap_size);
 
 
+}
 
 
 
@@ -46,10 +51,11 @@ void MakeHeap(vector<int> &vec, int heap_size) {
 
 int main()
 {
-    vector<int> vec = {0, 1, 999, 83, 335, 42, 4, 0, 5545, 8888};
+    vector<int> vec = {66,0, 1, 999, 83, 5, 42, 4, 0, 5545, 99};
     int heap_size = vec.size();  
 
-    MakeHeap(vec, heap_size);
+    MainSort(vec, heap_size);
+    
 
     for (int i : vec)
     {
