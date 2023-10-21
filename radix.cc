@@ -53,7 +53,7 @@ vector<int> radix(vector<int> vec) {
 int main()
 {
 
-vector <int> vec = {0, 1, 9, 3, 3335, 42, 4, 0, 5545, 888};
+vector <int> vec = {1231230, 1, 9, 3,3,3, 3335, 42, 4, 0, 5545, 88328};
 
 vec=radix(vec);
 for (int i : vec)
