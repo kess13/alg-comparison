@@ -1,71 +1,62 @@
 #include <iostream>
 #include <vector>
+#include<string>
 using namespace std;
 #include <algorithm>
+vector <int> radix(vector<int> vec)
+{
+     vector<int> VecWithCutValues(vec);
+     vector<int> VecForCountSort(vec);
+ int maxel = vec[0];  
 
-
-
-
-void heapify(vector<int> &vec, int i, int size) {
-    int CurrentElIndex = i;
-    int LeftChild = 2 * i + 1;
-    int RightChild = 2 * i + 2;
-    
-      
-        if (LeftChild < size && vec[LeftChild] > vec[CurrentElIndex])
-        swap(vec[CurrentElIndex], vec[LeftChild]);
-
-   
-  if (RightChild < size && vec[RightChild] > vec[CurrentElIndex])
-        swap(vec[CurrentElIndex], vec[RightChild]);
-
-      if (vec[0]>vec[size-1])
-      swap(vec[0], vec[size-1]);
-}
-
-
-
-void MakeHeap(vector<int> &vec, int heap_size) {
-    
-    for (int i = heap_size/2-1; i >= 0; i--) { 
-        heapify(vec, i, heap_size);
+    for (size_t i = 1; i < vec.size()-1; i++) {
+        if (vec[i] > maxel) {
+            maxel = vec[i];  
+        }
     }
-   
-    
-    
-    
-}
-void MainSort (vector<int> &vec, int heap_size)
+int temp=0;
+  string maxDigit = to_string(maxel);
+
+
+for (int j = 0; j < maxDigit.length(); j++) {
+ for (int i=0; i<vec.size(); i++) {
+    temp=VecWithCutValues[i]%10;
+    VecWithCutValues[i]=VecWithCutValues[i]/10;
+   VecForCountSort[i]=temp;
+    }
+  vector<int> countarr(10,0);//Right.Initialize a countArray[] of length max+1 with all elements as 0. This array will be used for storing the occurrences of the elements of the input array.
+ 
+
+
+for (int i=0; i < vec.size(); i++)
 {
-MakeHeap(vec,heap_size);
-for (int i = 0; i< heap_size-1; i++)
+countarr[i]=count( VecForCountSort.begin(),  VecForCountSort.end(), i);//Right.In the countArray[], store the count of each unique element of the input array at their respective indices.
+}
+for (int i=0; i < 10; i++) 
 {
-heapify(vec, i, heap_size-i);
-
-
+                                 //Store the cumulative sum or prefix sum of the elements of the countArray[] . right
+temp=temp+countarr[i];
+countarr[i]=temp;
 }
-
+vector<int> res(vec.size());
+ for (int i = vec.size() - 1; i >= 0; i--) {
+       res[countarr[vec[i]] - 1] =vec[i];
+       countarr[vec[i]]--;
+    }
+    vec=res;
 }
-
-
-
-
-
+    return vec;
+}
+ 
 
 
 
 int main()
 {
-    vector<int> vec = {66,0, 1, 999, 83, 5, 42, 4, 0, 5545, 99};
-    int heap_size = vec.size();  
-
-    MainSort(vec, heap_size);
-    
-
-    for (int i : vec)
-    {
-        cout << " " << i;
-    }
-
-    return 0;
+vector <int> vec = {1, 1, 9, 3,33,43, 3, 4, 4, 0, 4454,3, 8};
+vec=radix(vec);
+for (int i : vec)
+{
+cout << " " <<i;
+}
 }

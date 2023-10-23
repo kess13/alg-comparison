@@ -3,68 +3,61 @@
 #include<string>
 using namespace std;
 #include <algorithm>
-vector <int> countingsort(vector<int> vec, vector<int> &MainVec)
+vector <int> radix(vector<int> vec)
 {
+     vector<int> VecWithCutValues(vec);
+     vector<int> VecForCountSort(vec);
+ int maxel = vec[0];  
 
-auto max = max_element(vec.begin(), vec.end());//Find out the maximum element from the given array.
-int maxel= *max;
+    for (size_t i = 1; i < vec.size()-1; i++) {
+        if (vec[i] > maxel) {
+            maxel = vec[i];  
+        }
+    }
 int temp=0;
-vector<int> countarr(maxel+1,0);//Right.Initialize a countArray[] of length max+1 with all elements as 0. This array will be used for storing the occurrences of the elements of the input array.
+  string maxDigit = to_string(maxel);
 
-for (int i=0; i <= maxel; i++)
+
+for (int j = 0; j < maxDigit.length(); j++) {
+    
+ for (int i=0; i<vec.size(); i++) {
+    temp=VecWithCutValues[i]%10;
+    VecWithCutValues[i]=VecWithCutValues[i]/10;
+   VecForCountSort[i]=temp;
+    }
+  vector<int> countarr(10,0);//Right.Initialize a countArray[] of length max+1 with all elements as 0. This array will be used for storing the occurrences of the elements of the input array.
+ 
+
+
+for (int i=0; i < VecForCountSort.size(); i++)
 {
-countarr[i]=count(vec.begin(), vec.end(), i);//Right.In the countArray[], store the count of each unique element of the input array at their respective indices.
+    countarr[VecForCountSort[i]]++;
 }
-for (int i=0; i <= maxel; i++) 
-{
-                      //Store the cumulative sum or prefix sum of the elements of the countArray[] . right
-temp=temp+countarr[i];
-countarr[i]=temp;
-}
+
+
+ for (int i=1; i <= maxel; i++) {
+        countarr[i]=countarr[i] +countarr[i-1];
+    }
 vector<int> res(vec.size());
  for (int i = vec.size() - 1; i >= 0; i--) {
-       res[ countarr[vec[i]] - 1] =MainVec[i];
-       countarr[vec[i]]--;
+        res[countarr[VecForCountSort[i]] - 1] = vec[i];
+            countarr[VecForCountSort[i]]--;
     }
-    return res;
+    vec=res;
 
 }
- 
- 
-vector<int> radix(vector<int> vec) {
-    auto max = max_element(vec.begin(), vec.end());
-    int maxel = *max;
-    int temp;
-    vector<int> veccopy(vec);
-    string maxDigit = to_string(maxel);
-    vector<int> res(vec.size());
-
-    for (int j = 0; j < maxDigit.length(); j++) {
-        for (int i = 0; i < vec.size(); i++) {
-            temp = veccopy[i] % 10;
-            veccopy[i] = veccopy[i] / 10;
-            res[i] = temp;
-        }
-
-        vec = countingsort(res, vec); 
-    }
     return vec;
 }
-
-
+ 
 
 
 
 int main()
 {
-
-vector <int> vec = {1, 1, 9, 333,3,43, 3, 4, 4, 0, 4454,3, 8};
-
+vector <int> vec = {1, 1, 9, 3,33,43, 3, 4, 4, 0, 4454,3, 8};
 vec=radix(vec);
 for (int i : vec)
 {
 cout << " " <<i;
-
 }
-
 }
