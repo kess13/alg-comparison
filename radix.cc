@@ -1,63 +1,34 @@
 #include <iostream>
 #include <vector>
-#include<string>
 using namespace std;
 #include <algorithm>
-vector <int> radix(vector<int> vec)
+
+vector<int> countingsort(vector<int> vec) {
+    auto max = max_element(vec.begin(), vec.end());
+    int maxel= *max;
+    vector<int> countarr(maxel+1,0);//Initialize a countArray[] of length max+1 with all elements as 0. This array will be used for storing the occurrences of the elements of the input array.
+
+   for (int i=0; i <= maxel; i++)
 {
-     vector<int> VecWithCutValues(vec);
-     vector<int> VecForCountSort(vec);
- int maxel = vec[0];  
-
-    for (size_t i = 1; i < vec.size()-1; i++) {
-        if (vec[i] > maxel) {
-            maxel = vec[i];  
-        }
+countarr[i]=count(vec.begin(),  vec.end(), i);
+}
+    for (int i=1; i <= maxel; i++) {
+        countarr[i] += countarr[i-1];//We can calculate the cumulative frequency by adding the current value to the previous index value
     }
-int temp=0;
-  string maxDigit = to_string(maxel);
 
-
-for (int j = 0; j < maxDigit.length(); j++) {
+    vector<int> res(vec.size());
+    for (int i = 0; i < vec.size(); i++) {
+        res[countarr[vec[i]] - 1] = vec[i];
+        countarr[vec[i]]--;
+    }
     
- for (int i=0; i<vec.size(); i++) {
-    temp=VecWithCutValues[i]%10;
-    VecWithCutValues[i]=VecWithCutValues[i]/10;
-   VecForCountSort[i]=temp;
+    return res;
+}
+
+int main() {
+    vector<int> vec = {0,1,7,6,6,3,9,3,5,2,4,0,6,8,5,6,7,8,2,1};
+    vec = countingsort(vec);
+    for (int i : vec) {
+        cout << " " <<i;
     }
-  vector<int> countarr(10,0);//Right.Initialize a countArray[] of length max+1 with all elements as 0. This array will be used for storing the occurrences of the elements of the input array.
- 
-
-
-for (int i=0; i < VecForCountSort.size(); i++)
-{
-    countarr[VecForCountSort[i]]++;
-}
-
-
- for (int i=1; i <= maxel; i++) {
-        countarr[i]=countarr[i] +countarr[i-1];
-    }
-vector<int> res(vec.size());
- for (int i = vec.size() - 1; i >= 0; i--) {
-        res[countarr[VecForCountSort[i]] - 1] = vec[i];
-            countarr[VecForCountSort[i]]--;
-    }
-    vec=res;
-
-}
-    return vec;
-}
- 
-
-
-
-int main()
-{
-vector <int> vec = {1, 1, 9, 3,33,43, 3, 4, 4, 0, 4454,3, 8};
-vec=radix(vec);
-for (int i : vec)
-{
-cout << " " <<i;
-}
 }

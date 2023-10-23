@@ -39,7 +39,7 @@ vector<int> testVector3 = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
 vector<int> testVector4 = {1, 1, 1, 1, 1, 1};
 vector<int> testVector5 = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
 vector<int> testVector6 = {100, 90, 80, 70, 60, 50, 40, 30, 20, 10};
-vector<int> testVector7 = {2,1};
+vector<int> testVector7 = {122,2,1};
 vector<int> testVector8 = {}; 
  insertionsort(testVector1);
   insertionsort(testVector2);
