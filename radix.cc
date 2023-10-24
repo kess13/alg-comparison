@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 #include <algorithm>
-
+#include <string>
 vector<int> countingsort(vector<int> vec) {
     auto max = max_element(vec.begin(), vec.end());
     int maxel= *max;
@@ -24,11 +24,36 @@ countarr[i]=count(vec.begin(),  vec.end(), i);
     
     return res;
 }
+vector<int> radix(vector<int> vec) {
+    auto max = max_element(vec.begin(), vec.end());
+    int maxel = *max;
+    string maxDigit = to_string(maxel);
+    vector<int> VecWithCutValues(vec);
+    vector<int> VecForCountSort(vec.size());
+
+    for (int j = 0; j < maxDigit.length(); j++) {
+        for (int v = 0; v < vec.size(); v++) {
+            int temp = VecWithCutValues[v] % 10;
+            VecWithCutValues[v] = VecWithCutValues[v] / 10;
+            VecForCountSort[v] = temp;
+        }
+
+        vec = countingsort(vec);
+    }
+
+    return vec;
+}
+
 
 int main() {
-    vector<int> vec = {0,1,7,6,6,3,9,3,5,2,4,0,6,8,5,6,7,8,2,1};
-    vec = countingsort(vec);
+    vector<int> vec = {3,2,1,0,213,123,14,12,31,14,12,431,41,23,1222,1};
+    vec = radix(vec);
     for (int i : vec) {
         cout << " " <<i;
+    }
+     if (is_sorted(vec.begin(), vec.end()))
+    {
+        cout << "  true" << endl;
+        return 0;
     }
 }
