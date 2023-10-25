@@ -3,7 +3,7 @@
 using namespace std;
 #include <algorithm>
 #include <string>
-vector<int> countingsort(vector<int> vec) {
+vector<int> countingsort(vector<int> vec, vector<int> &MainVec) {
     auto max = max_element(vec.begin(), vec.end());
     int maxel= *max;
     vector<int> countarr(maxel+1,0);//Initialize a countArray[] of length max+1 with all elements as 0. This array will be used for storing the occurrences of the elements of the input array.
@@ -38,7 +38,7 @@ vector<int> radix(vector<int> vec) {
             VecForCountSort[v] = temp;
         }
 
-         vec = countingsort(VecForCountSort);
+         vec=(VecForCountSort,vec);
     }
 
     return vec;
