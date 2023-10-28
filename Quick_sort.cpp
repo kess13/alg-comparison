@@ -1,9 +1,53 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+#include <algorithm>
+#include <chrono>
+#include <thread> 
+#include <cstdlib>
 
+vector<int> generateRandomArray(int size) {
+    vector<int> vec(size);
+    for (int i = 0; i < size; i++) {
+        vec[i] = rand(); 
+    }
+    return vec;
+}
+vector<int> SortedArr(int size) {
+    vector<int> vec(size);
+    for (int i = 0; i < size; i++) {
+        vec[i] = i; 
+    }
+    return vec;
+}
+vector<int> ReversedSortedArr(int size) {
+    vector<int> vec(size);
+    for (int i = size-1;  i>=0 ; i--) {
+        vec[i] = i; 
+    }
+    return vec;
+}
+
+struct Timer
+{
+std::chrono::high_resolution_clock::time_point start, end;
+chrono::duration<float> duration;
+Timer()
+{
+start =chrono::high_resolution_clock::now();
+}
+
+~Timer()
+{
+end = chrono::high_resolution_clock::now();
+duration = end - start;
+float ms = duration.count() * 1000.0f;
+cout<<"Timer took "<< ms <<"ms"<<endl;
+}
+};
 void quick(vector<int> &vec, int start, int end)
 {
+    
     if (start >= end)
         return;
 
@@ -37,15 +81,13 @@ void quick(vector<int> &vec, int start, int end)
 
 int main()
 {
-    vector<int> vec{1, 5, 55, 251, 9, 33, 43, 77, 22,89, 24, 46, 58, 20, 37, 94, 72, 86, 14, 35, 77, 96, 22, 41, 63, 87, 10,22};
+    Timer timer;
+    vector <int> vec= generateRandomArray(10000);
     int start = 0;
     int end = vec.size() - 1;
     quick(vec, start, end);
 
-    for (size_t i = 0; i < vec.size(); i++)
-    {
-        cout << vec[i] << " ";
-    }
+ 
     
     return 0;
 }
