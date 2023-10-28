@@ -31,7 +31,7 @@ void quick(vector<int> &vec, int start, int end)
         }
     }
 
-    quick(vec, 0, right);
+    quick(vec, start, right);
     quick(vec, left, end);
 }
 
