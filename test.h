@@ -39,18 +39,27 @@ vector<int> ReversedSortedArr(int size)
 struct Timer
 {
     std::chrono::high_resolution_clock::time_point start, end;
-    chrono::duration<float> duration;
+    std::chrono::duration<float> duration;
+    float totalTime;
+
     Timer()
     {
-        start = chrono::high_resolution_clock::now();
+        start = std::chrono::high_resolution_clock::now();
+        totalTime = 0.0;
+    }
+
+    void stop()
+    {
+        end = std::chrono::high_resolution_clock::now();
+        duration = end - start;
+        float ms = duration.count() * 1000.0f;
+        totalTime += ms;
     }
 
     ~Timer()
     {
-        end = chrono::high_resolution_clock::now();
-        duration = end - start;
-        float ms = duration.count() * 1000.0f;
-        cout << "Timer took " << ms << "ms" << endl;
+        cout << "Total time: " << totalTime << "ms" << endl;
     }
 };
+
 #endif
