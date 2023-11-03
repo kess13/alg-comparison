@@ -20,7 +20,7 @@ void heapify(vector<int> &vec, int i, int size)
         Left = true;
     }
 
-    if (RightChild < size && vec[RightChild] > vec[CurrentElIndex])
+    if (RightChild < size && vec[RightChild] > vec[CurrentElIndex])//control edge case with size
     {
         swap(vec[CurrentElIndex], vec[RightChild]);
         SwappedRight = RightChild;
@@ -35,7 +35,7 @@ void heapify(vector<int> &vec, int i, int size)
 
 void MakeHeap(vector<int> &vec, int heap_size)
 {
-    for (int i = heap_size / 2 - 1; i >= 0; i--)
+    for (int i = heap_size / 2 - 1; i >= 0; i--)//start with the last parent that has children
     {
         heapify(vec, i, heap_size);
     }
@@ -47,10 +47,10 @@ void MainSort(vector<int> &vec, int heap_size)
     // First, we swap the top with the last element in the array,
     // and we decrease the size of the heap.
     // This in almost all cases destroys the heap property, so we have to fix it, this time from the top to the bottom.
-    for (int i = heap_size - 1; i >= 0; i--)
+    while (heap_size-- >0)
     {
-        swap(vec[0], vec[i]);
-        heapify(vec, 0, i);
+        swap(vec[0], vec[heap_size]);
+        heapify(vec, 0, heap_size);
     }
 }
 

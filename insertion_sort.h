@@ -4,29 +4,21 @@
 #include <vector>
 using namespace std;
 #include <algorithm>
-void insertionsort(vector<int> &vec)
+void insertionsort(vector<int> &array, int arrayLength)
 {
 
-    int temp = 0;
-    for (int key = 1; key < vec.size(); key++)
+    for (int currentIndex = 1; currentIndex < arrayLength; currentIndex++)
     {
-        int pos = 0;
-        bool change = false;
-        for (int ElemBefore = key - 1; ElemBefore >= 0; ElemBefore--)
-        {
-            if (vec[ElemBefore] > vec[key])
+        int currentValue = array[currentIndex];
+        int insertionIndex = currentIndex;
 
-            {
-                pos = ElemBefore;
-                change = true;
-                temp = vec[key];
-            }
-        }
-        if (change)
+        while (insertionIndex > 0 && array[insertionIndex - 1] > currentValue)
         {
-            vec.erase(vec.begin() + key);
-            vec.insert(vec.begin() + pos, temp);
+            array[insertionIndex] = array[insertionIndex - 1];
+            insertionIndex--;
         }
+
+        array[insertionIndex] = currentValue;
     }
 }
 #endif
