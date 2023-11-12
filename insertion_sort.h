@@ -3,22 +3,20 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-#include <algorithm>
-void insertionsort(vector<int> &array, int arrayLength)
+
+void insertionsort(vector<int> &array)
 {
+    int arrayLength = array.size();
 
     for (int currentIndex = 1; currentIndex < arrayLength; currentIndex++)
     {
-        int currentValue = array[currentIndex];
         int insertionIndex = currentIndex;
 
-        while (insertionIndex > 0 && array[insertionIndex - 1] > currentValue)
+        while (insertionIndex > 0 && array[insertionIndex - 1] > array[insertionIndex])
         {
-            array[insertionIndex] = array[insertionIndex - 1];
+            swap(array[insertionIndex], array[insertionIndex - 1]);
             insertionIndex--;
         }
-
-        array[insertionIndex] = currentValue;
     }
 }
 #endif

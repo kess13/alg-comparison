@@ -37,23 +37,21 @@ void radix(vector<int> &vec)
     auto max = max_element(vec.begin(), vec.end());
     int maxel = *max;
     string maxDigit = to_string(maxel);
-    vector<int> VecWithCutValues(vec);
     vector<int> VecForCountSort(vec.size());
     int multiplier = 1;
     for (int j = 0; j < maxDigit.length(); j++)
     {
-        vector<int> VecWithCutValues(vec);
         multiplier *= 10;
 
         for (int v = 0; v < vec.size(); v++)
         {
-            int temp = VecWithCutValues[v] % multiplier;
-
-            VecForCountSort[v] = temp;
+            int temp = vec[v] % multiplier;
+            VecForCountSort[v] = temp / (multiplier / 10); // to get proper digit from number
         }
 
         countingsort(VecForCountSort, vec);
     }
 }
+
 
 #endif
