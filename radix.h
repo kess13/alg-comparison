@@ -5,18 +5,22 @@
 using namespace std;
 #include <algorithm>
 #include <string>
-void countingsort(vector<int> vec, vector<int> &MainVec)
+void countingsort(vector<int> &vec, int multiplier)
 {
     if (vec.empty())
         return;
+
     auto max = max_element(vec.begin(), vec.end());
     int maxel = *max;
     vector<int> countarr(maxel + 1, 0);
 
-    for (int i = 0; i <= maxel; i++)
+    for (int i = 0; i< vec.size(); i++)
     {
-        countarr[i] = count(vec.begin(), vec.end(), i);
+        int digit = (vec[i]/multiplier)%10;
+        countarr[digit]++;
+
     }
+   
     for (int i = 1; i <= maxel; i++)
     {
         countarr[i] += countarr[i - 1];
@@ -25,10 +29,11 @@ void countingsort(vector<int> vec, vector<int> &MainVec)
     vector<int> res(vec.size());
     for (int i = vec.size() - 1; i >= 0; i--)
     {
-        res[countarr[vec[i]] - 1] = MainVec[i];
-        countarr[vec[i]]--;
+         int digit = (vec[i]/multiplier)%10;
+        res[countarr[digit] - 1] = vec[i];
+        countarr[digit]--;
     }
-    MainVec = res;
+    vec = res;
 }
 void radix(vector<int> &vec)
 {
@@ -36,22 +41,19 @@ void radix(vector<int> &vec)
         return;
     auto max = max_element(vec.begin(), vec.end());
     int maxel = *max;
-    string maxDigit = to_string(maxel);
-    vector<int> VecForCountSort(vec.size());
-    int multiplier = 1;
-    for (int j = 0; j < maxDigit.length(); j++)
+    int length = 0;
+    int temp = maxel;
+    while (temp != 0)
     {
+        temp /= 10;
+        length++;
+    }
+    int multiplier = 1;
+    for (int j = 0; j < length; j++)
+    {
+        countingsort(vec, multiplier);
         multiplier *= 10;
-
-        for (int v = 0; v < vec.size(); v++)
-        {
-            int temp = vec[v] % multiplier;
-            VecForCountSort[v] = temp / (multiplier / 10); // to get proper digit from number
-        }
-
-        countingsort(VecForCountSort, vec);
     }
 }
-
 
 #endif

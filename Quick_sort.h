@@ -17,12 +17,12 @@ void quick(vector<int> &vec, int start, int end)
 
     while (left <= right)
     {
-        while (vec[left] < pivot)
+        while (left <= right && vec[left] < pivot)
         {
             left++;
         }
 
-        while (vec[right] > pivot)
+        while (left <= right && vec[right] > pivot)
         {
             right--;
         }
