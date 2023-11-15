@@ -10,20 +10,22 @@ void heapify(vector<int> &vec, int i, int size)
     int LeftChild = 2 * i + 1;
     int RightChild = 2 * i + 2;
     int largestChild=i;
+    int maxVal=0;
 
-    if ( LeftChild < size && RightChild < size )
+     
+    if (RightChild < size)// Check if both children exist
     {
-       if (vec[LeftChild] > vec[RightChild])
-        {
-            largestChild = LeftChild;
-        }
-        else
-        {
-            largestChild = RightChild;
-        }
+       
+        largestChild = (vec[LeftChild] > vec[RightChild]) ? LeftChild : RightChild;
     }
+    else if (LeftChild < size) //if not check for left only
+    {
+        largestChild = LeftChild;
+    }
+   
+    
  
-if (vec[CurrentElIndex]<vec[largestChild])
+if ( vec[CurrentElIndex]<vec[largestChild])
 {
       swap(vec[CurrentElIndex], vec[largestChild]);
        heapify(vec, largestChild, size);

@@ -22,51 +22,59 @@ vector<int> generateRandomArray(int size)
     }
     return vec;
 }
-vector<int> SortedArr(int size)
-{
-    vector<int> vec(size);
-    for (int i = 0; i < size; i++)
-    {
-        vec[i] = i;
-    }
-    return vec;
-}
-vector<int> ReversedSortedArr(int size)
-{
-    vector<int> vec(size);
-    for (int i = size - 1; i >= 0; i--)
-    {
-        vec[i] = i;
-    }
-    return vec;
-}
 
 struct Timer
 {
     std::chrono::high_resolution_clock::time_point start, end;
     std::chrono::duration<float> duration;
-    float totalTime;
+    float totalTimeQuick;
+    float totalTimeRadix;
+    float totalTimeInsertion;
+    float totalTimeHeap;
     float max = 0.0f;
     Timer()
     {
         start = std::chrono::high_resolution_clock::now();
-        totalTime = 0.0;
+        totalTimeQuick = 0.0;
+        totalTimeRadix = 0.0;
+        totalTimeInsertion = 0.0;
+        totalTimeHeap = 0.0;
     }
 
-    void stop()
+    void startt()
+    {
+        start = std::chrono::high_resolution_clock::now();
+    }
+
+    void stopQuick()
     {
         end = std::chrono::high_resolution_clock::now();
         duration = end - start;
         float ms = duration.count() * 1000.0f;
-        totalTime += ms;
-        if (max < ms)
-            max = ms;
+        totalTimeQuick += ms;
     }
 
-    ~Timer()
+    void stopRadix()
     {
-        cout << "Total time: " << totalTime << "ms" << endl;
-        cout << "The maximum duration is " << max << endl;
+        end = std::chrono::high_resolution_clock::now();
+        duration = end - start;
+        float ms = duration.count() * 1000.0f;
+        totalTimeRadix += ms;
+    }
+
+    void stopInsertion()
+    {
+        end = std::chrono::high_resolution_clock::now();
+        duration = end - start;
+        float ms = duration.count() * 1000.0f;
+        totalTimeInsertion += ms;
+    }
+    void stopHeap()
+    {
+        end = std::chrono::high_resolution_clock::now();
+        duration = end - start;
+        float ms = duration.count() * 1000.0f;
+        totalTimeHeap += ms;
     }
 };
 
