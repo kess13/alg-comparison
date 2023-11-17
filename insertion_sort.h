@@ -4,19 +4,20 @@
 #include <vector>
 using namespace std;
 
-void insertionsort(vector<int> &array)
+void insertionsort(vector <int> vec)
 {
-    int arrayLength = array.size();
-
-    for (int currentIndex = 1; currentIndex < arrayLength; currentIndex++)
+    for (int currentIndex = 1; currentIndex < vec.size(); currentIndex++)
     {
+        int val = vec[currentIndex];
         int insertionIndex = currentIndex;
 
-        while (insertionIndex > 0 && array[insertionIndex - 1] > array[insertionIndex])
+        while (insertionIndex > 0 && vec[insertionIndex - 1] > val)
         {
-            swap(array[insertionIndex], array[insertionIndex - 1]);
+            vec[insertionIndex] = vec[insertionIndex - 1];
             insertionIndex--;
         }
+
+        vec[insertionIndex] = val;
     }
 }
 #endif
