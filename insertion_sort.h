@@ -4,7 +4,7 @@
 #include <vector>
 using namespace std;
 
-void insertionsort(vector <int> vec)
+void insertionsort(vector <int> &vec)
 {
     for (int currentIndex = 1; currentIndex < vec.size(); currentIndex++)
     {

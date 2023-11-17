@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 #include <algorithm>
-#include "insertion_sort.h"
+#include "Insertion_sort.h"
 #include "Quick_sort.h"
 #include "radix.h"
 #include "heap.h"
@@ -11,7 +11,7 @@ using namespace std;
 int main()
 {
     Timer timer;
-    int sortedRightTimes = 0;
+   // int sortedRightTimes = 0;
     const int AmountOfTests = 100;
     cout << "Quick_sort"
          << " Radix_sort"

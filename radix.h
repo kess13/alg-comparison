@@ -10,9 +10,8 @@ void countingsort(vector<int> &vec, int multiplier)
     if (vec.empty())
         return;
 
-    auto max = max_element(vec.begin(), vec.end());
-    int maxel = *max;
-    vector<int> countarr(maxel + 1, 0);
+    
+    vector<int> countarr( 10, 0);
 
     for (int i = 0; i< vec.size(); i++)
     {
@@ -21,7 +20,7 @@ void countingsort(vector<int> &vec, int multiplier)
 
     }
    
-    for (int i = 1; i <= maxel; i++)
+    for (int i = 1; i <= 10; i++)
     {
         countarr[i] += countarr[i - 1];
     }
