@@ -31,6 +31,7 @@ struct Timer
     float totalTimeRadix;
     float totalTimeInsertion;
     float totalTimeHeap;
+    float totalTimeHybrid = 0.0;
     float max = 0.0f;
     Timer()
     {
@@ -39,6 +40,7 @@ struct Timer
         totalTimeRadix = 0.0;
         totalTimeInsertion = 0.0;
         totalTimeHeap = 0.0;
+        totalTimeHybrid = 0.0;
     }
 
     void startt()
@@ -75,6 +77,14 @@ struct Timer
         duration = end - start;
         float ms = duration.count() * 1000.0f;
         totalTimeHeap += ms;
+    }
+
+     void stopHybrid()
+    {
+        end = std::chrono::high_resolution_clock::now();
+        duration = end - start;
+        float ms = duration.count() * 1000.0f;
+        totalTimeHybrid += ms;
     }
 };
 
