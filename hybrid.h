@@ -4,43 +4,9 @@
 #include <iostream>
 
 using namespace std;
-
-void quick(vector<int> &vec, int start, int end, int size)
+void insertionsortforhybrid(vector <int> &vec , int indexfirst , int indexend )
 {
-
-    if (start >= end || size < 10)
-        return;
-
-    int pivot = vec[start + (end - start) / 2];
-    int left = start;
-    int right = end;
-
-    while (left <= right)
-    {
-        while (left <= right && vec[left] < pivot)
-        {
-            left++;
-        }
-
-        while (left <= right && vec[right] > pivot)
-        {
-            right--;
-        }
-
-        if (left <= right)
-        {
-            swap(vec[left], vec[right]);
-            left++;
-            right--;
-        }
-    }
-    size--;
-    quick(vec, start, right, size);
-    quick(vec, left, end, size);
-}
-void insertionsortforhybrid(vector <int> &vec)
-{
-    for (int currentIndex = 1; currentIndex < 10; currentIndex++)
+    for (int currentIndex = indexfirst ; currentIndex < indexend; currentIndex++)// we sort first ten el anyway
     {
         int val = vec[currentIndex];
         int insertionIndex = currentIndex;
@@ -56,10 +22,67 @@ void insertionsortforhybrid(vector <int> &vec)
 }
 
 
+void quicksortforhybrid(vector<int> &vec, int start, int end)
+{
+    
+int size= end-start+1;
+ if (size <= 10)
+    {
+        insertionsortforhybrid(vec, start ,end);
+        return;
+    }
+    if (start >= end )
+        return;
+
+
+    int pivot = vec[start + (end - start) / 2];
+    int pivotindex = start + (end - start) / 2;
+    int left = start;
+    int right = end;
+
+    while (left <= right)
+    {
+        while (left <= right && vec[left] < pivot)
+        {
+           
+            if (pivotindex- left<=10 )
+            {
+            insertionsortforhybrid(vec, left , pivotindex);
+            break;
+            }
+             left++;
+        }
+
+        while (left <= right && vec[right] > pivot)
+        {
+            
+             if (right - pivotindex<=10 )
+             {
+            insertionsortforhybrid(vec, pivot, right);
+            break;
+             }
+             right--;
+            
+        }
+
+        if (left <= right)
+        {
+            swap(vec[left], vec[right]);
+            left++;
+            right--;
+        }
+    }
+
+    quick(vec, start, right );
+    quick(vec, left, end);
+}
+
+
 void hybrid(vector<int> &vec)
 {
     int size = vec.size();
-    quick(vec, 0, size - 1, size);
-    insertionsortforhybrid(vec);
+    quicksortforhybrid(vec, 0, size - 1);
+  
+    
 }
 #endif
