@@ -11,7 +11,7 @@ void insertionsortforhybrid(vector <int> &vec , int indexfirst , int indexend )
         int val = vec[currentIndex];
         int insertionIndex = currentIndex;
 
-        while (insertionIndex > 0 && vec[insertionIndex - 1] > val)
+        while (insertionIndex > indexfirst && vec[insertionIndex - 1] > val)
         {
             vec[insertionIndex] = vec[insertionIndex - 1];
             insertionIndex--;
@@ -48,7 +48,7 @@ int size= end-start+1;
             if (pivotindex- left<=10 )
             {
             insertionsortforhybrid(vec, left , pivotindex);
-            break;
+            
             }
              left++;
         }
@@ -59,7 +59,7 @@ int size= end-start+1;
              if (right - pivotindex<=10 )
              {
             insertionsortforhybrid(vec, pivot, right);
-            break;
+           
              }
              right--;
             
