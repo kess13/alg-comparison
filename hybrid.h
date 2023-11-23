@@ -6,7 +6,7 @@
 using namespace std;
 void insertionsortforhybrid(vector <int> &vec , int indexfirst , int indexend )
 {
-    for (int currentIndex = indexfirst ; currentIndex < indexend; currentIndex++)
+    for (int currentIndex = indexfirst+1 ; currentIndex <= indexend; currentIndex++)
     {
         int val = vec[currentIndex];
         int insertionIndex = currentIndex;
@@ -29,13 +29,14 @@ int size= end-start+1;
  if (size <= 10)
     {
         insertionsortforhybrid(vec, start ,end);
+        
     }
     if (start >= end )
         return;
 
 
     int pivot = vec[start + (end - start) / 2];
-    int pivotindex = start + (end - start) / 2;
+   
     int left = start;
     int right = end;
 
@@ -43,17 +44,12 @@ int size= end-start+1;
     {
         while (left <= right && vec[left] < pivot)
         {
-           
-           
              left++;
         }
 
         while (left <= right && vec[right] > pivot)
         {
-            
-            
-             right--;
-            
+                right--;
         }
 
         if (left <= right)
