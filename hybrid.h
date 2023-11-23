@@ -26,7 +26,7 @@ void quicksortforhybrid(vector<int> &vec, int start, int end)
 {
     
 int size= end-start+1;
- if (size <= 10)
+ if (size <= 20)
     {
         insertionsortforhybrid(vec, start ,end);
         
